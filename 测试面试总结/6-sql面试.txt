@@ -1,0 +1,115 @@
+--启动数据库：sudo mysql.server start
+
+--状态数据库：sudo mysql.server status
+
+--关闭数据库：sudo myql.server stop
+
+--进入mysql命令： /usr/local/mysql/bin/mysql -u root -p
+--如果报错执行：/usr/local/mysql/bin/mysql -uroot -h 127.0.0.1 -p
+
+--输入你的密码：xxxx
+
+--展示数据库：show databases
+
+--切换数据库： use 数据库名称
+
+--展示数据库中的表: show tables
+
+--创建数据库: create database test
+
+--创建表: create table test(id int,name varchar(20))
+
+--插入数据：
+insert into student(学号,姓名,出生日期,性别)
+values('0004' , '王思聪' , '1990-05-20' , '男');
+
+--更新数据：
+update test set name="updatename" where id = 2
+
+--删除数据库：drop database test
+
+--删除表的数据：delete from test
+
+--删除表数据和表结构: drop table test
+
+--删除表字段：delete from user where uid = %s'
+
+--查询表中所有数据
+select * from 表名;
+
+（指定范围查询）
+--查询users表中年龄在18~25岁之间的记录
+select * from users where age>=18 and age<=25;
+
+--查询users表中年龄为18,20,25岁的记录
+方式1 ：select * from users where age=18 or age=20 or age=25;
+方式2 ：select * from users where age in (18,20,25);
+
+（为空/不为空）
+--查询users表中序号不为空的记录
+select * from users where id is not null;
+
+--查询user表中序号为空的记录
+select * form users where id is null;
+
+（模糊查询）
+--查询users表中姓名第一个字为李的记录
+select * from users where name like '李%';
+
+--查询users表中姓名第二个字为李的记录
+select * from users where name like '_李%';
+
+--查询users表中姓名含有李字的记录
+select * from users where name like '%李%'；
+
+--查询users表中姓名是两个字的记录
+select * from users where name like '_ _';
+
+（去重）
+--去除重复记录查询（distinct）
+select distinct city from users;
+
+（排序）
+--查询users表中记录，并以年龄升序排序
+select * from users order by age;
+
+--查询users表中记录，并以年龄降序排序
+select * from users order by age desc;
+
+（求和）select sum(字段) from 表名;
+（最大值）select max(字段) from 表名;
+（最小值）select min(字段) from 表名;
+（平均值）select avg(字段) from 表名；
+（计算总数）select count(字段)(as totalcout) from 表名；（里面的as是别名的意思）
+
+（分组查询）
+--查询users表中的记录，按照性别分组，查询男，女的体育成绩平均分
+select gender,avg(PE) from users group by gender;
+
+（分页查询）
+--查询users表中第2~11条记录 (从第2条记录开始累加10条记录)
+select * from users limit 1,10;
+
+（内连接）
+--语法1 （隐式内连接）
+select 字段1,字段2  from 表1,表2 where 过滤条件;
+
+--语法2 （显式内连接）
+select 字段1,字段2 from 表1 inner join 表2  on 过滤条件;
+
+--（左外连接）
+select 字段1，字段2..
+from 表1 left outer join 表2 on 过滤条件;
+
+--（右外连接）
+select 字段1，字段2..
+from 表1 right outer join 表2 on 过滤条件；
+
+--（子查询）
+select username
+from user
+where age =(
+	select avg(age)
+    from userInfo
+)
+

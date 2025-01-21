@@ -1,0 +1,478 @@
+
+1、Python3 中有六个标准的数据类型：
+	•	Number（数字）(包括整型、浮点型、复数、布尔型等)
+	•	String（字符串）
+	•	List（列表）
+	•	Tuple（元组）
+	•	Set（集合）
+	•	Dictionary（字典）
+
+2、Python3 的六个标准数据类型中：
+	•	不可变数据（3 个）：Number（数字）、String（字符串）、Tuple（元组）；
+	•	可变数据（3 个）：List（列表）、Dictionary（字典）、Set（集合）
+
+3、Python是静态还是动态类型？是强类型还是弱类型？
+	•	动态强类型语言（不少人误以为是弱类型）
+	•	动态还是静态指的是编译器还是运行期确定类型
+	•	强类型指的是不会发生隐式类型转换
+	•
+
+4、python3和python2的对比
+print成为函数
+编码问题。python3不再有unicode对象，默认str就是unicode
+除法变化。python3除号返回浮点数，如果要返回整数，应使用//
+类型注解。帮助IDE实现类型检查
+优化的super()方便直接调用父类函数。Python3.x 和 Python2.x 的一个区别是: Python 3 可以使用直接使用 super().xxx 代替 super(Class, self).xxx :
+高级解包操作。a, b, *rest = range(10)
+keyword only arguments。限定关键字参数
+chained exceptions。python3重新抛出异常不会丢失栈信息
+一切返回迭代器。range, zip, map, dict.values, etc. are all iterators
+性能优化等。。。
+
+5、Python是如何传递参数的
+通过赋值传递参数
+
+6、python的可变/不可变对象
+不可变对象： bool/int/float/tuple/str/frozenset
+可变对象：list/set/dict
+
+7、Python中的 *args 和 **kwargs
+这两个是用来处理可变参数的，*args被打包成tuple，**kwargs被打包成dict
+
+8、Python处理异常
+	•	except (Exception1, Exception2) as e:  # 可以捕获多个异常并处理
+	•	finally:  # 无论异常有没有发生都会执行的代码，一般处理资源的关闭和释放 
+9、什么是Python中的global？
+GIL就是global，是Python函数内部声明的全局变量。这样可以在函数内部修改全局变量的值，而不是创建一个新的局部变量。‌
+
+
+10、Python中的列表？
+# 创建列表
+my_list = [1, 2, 3, 4, 5]  # 初始化一个包含整数的列表
+
+# 访问元素
+first_element = my_list[0]  # 访问第一个元素
+last_element = my_list[-1]   # 访问最后一个元素
+
+# 修改元素
+my_list[1] = 10  # 将第二个元素修改为 10
+
+# 添加元素
+my_list.append(6)  # 在末尾添加 6
+my_list.insert(1, 7)  # 在索引 1 位置插入 7
+
+# 删除元素
+my_list.remove(10)  # 删除值为 10 的元素
+removed_element = my_list.pop(0)  # 删除并返回第一个元素
+
+# 列表切片
+sub_list = my_list[1:4]  # 获取索引 1 到 3 的元素
+
+# 列表长度
+length = len(my_list)  # 获取列表的长度
+
+# 排序
+my_list.sort()  # 原地排序
+sorted_list = sorted(my_list)  # 返回一个新的排序列表
+
+# 反转
+my_list.reverse()  # 原地反转
+
+# 列表推导式
+squared_list = [x**2 for x in my_list]  # 创建一个平方值的新列表
+
+
+11、Python中的字典？
+# 创建字典
+my_dict = {'name': 'Alice', 'age': 25, 'city': 'New York'}  # 初始化一个包含键值对的字典
+
+# 访问元素
+name = my_dict['name']  # 访问键为 'name' 的值
+age = my_dict.get('age')  # 使用 get() 方法访问键为 'age' 的值
+
+# 修改元素
+my_dict['age'] = 30  # 修改键为 'age' 的值为 30
+
+# 添加元素
+my_dict['email'] = 'alice@example.com'  # 添加新的键值对
+
+# 删除元素
+del my_dict['city']  # 删除键为 'city' 的元素
+removed_value = my_dict.pop('name')  # 删除并返回键为 'name' 的值
+
+# 检查键是否存在
+has_age = 'age' in my_dict  # 检查键 'age' 是否在字典中
+
+# 获取所有键
+keys = my_dict.keys()  # 获取字典中的所有键
+
+# 获取所有值
+values = my_dict.values()  # 获取字典中的所有值
+
+# 获取所有键值对
+items = my_dict.items()  # 获取字典中的所有键值对
+
+# 字典合并
+another_dict = {'country': 'USA', 'gender': 'female'}  # 创建另一个字典
+my_dict.update(another_dict)  # 合并另一个字典到 my_dict
+
+# 字典推导式
+squared_dict = {x: x**2 for x in range(5)}  # 创建一个键为 0-4，值为其平方的新字典
+
+
+
+12、什么是迭代器和生成器和装饰器？
+return与yield区别：
+一句话总结：（当我调用某个函数，且想要多个值的时候，那么就用yield，如果只要一个值就用return）
+
+return是运行到该方法时程序结束，且返回对应数据
+yield是运行到该方法程序不会结束，且返回对应数据，会保存运行记录，下次迭代会从该位置继续运行。
+
+迭代器要满足两个条件__iter__ 与__next__
+调用可迭代对象iter方法返回一个迭代对象，然后不断调用next返回元素，知道迭代完成后停止迭代
+
+装饰器是Python中的一种设计模式，用于在不修改函数或方法的情况下，动态地增加功能。装饰器本质上是一个函数，它接受一个函数作为参数，并返回一个新的函数
+
+13、什么是协程？
+协程是一种轻量级的并发编程结构，允许在单线程中进行异步操作。与传统的线程或进程相比，协程的开销更小，能够更高效地管理并发任务.
+import gevent
+from gevent import monkey
+import time
+
+# 打补丁，确保标准库的I/O操作是非阻塞的
+monkey.patch_all()
+
+def task(n):
+    print(f"Task {n} started")
+    time.sleep(1)  # 模拟I/O操作
+    print(f"Task {n} finished")
+# 创建多个协程
+tasks = [gevent.spawn(task, i) for i in range(5)]
+# 等待所有协程完成
+gevent.joinall(tasks)
+
+在这个示例中：
+	•	使用monkey.patch_all()来打补丁，使得标准库的I/O操作变为非阻塞。
+	•	定义了一个task函数，模拟了一个耗时的I/O操作。
+	•	使用gevent.spawn()创建多个协程，并将它们存储在tasks列表中。
+	•	使用gevent.joinall()等待所有协程完成
+
+
+14、什么是闭包？
+他的作用是逻辑连续，外部函数调用一次,内部函数调用多次,内部函数可以连续访问外部函数变量
+
+装饰器外函数接收旧功能。内函数负责包裹新旧功能。
+
+闭包是一个非常重要的编程概念，尤其在Python等支持函数作为第一类对象的语言中。简单来说，闭包是一个函数，它“记住”了其定义时的环境，即使在其外部被调用时，仍然能够访问那些外部变量。
+def outer_function(x):
+    def inner_function(y):
+        return x + y
+    return inner_function
+
+# 创建闭包
+closure = outer_function(10)
+
+# 调用闭包
+result = closure(5)  # 10 + 5 = 15
+print(result)  # 输出: 15
+
+
+15、赋值、浅拷贝和深拷贝的区别？
+赋值：对象的赋值就是简单的对象引用。（直接赋值相当于重新起个名字）
+例如A = 1，然后B=A，那么a 和 b 是一样的，他们指向同一片内存，b 不过是 a 的别名，是引用。
+
+浅拷贝：浅拷贝会创建新对象。只拷贝父对象，不会拷贝子对象（例如离歌列表里面有1,2,3还有一个字典，那么浅拷贝只会拷贝1,2,3）
+浅拷贝有三种形式:切片操作、工厂函数、copy 模块中的 copy 函数。a = [1,2,"hello",['python', 'C++’]]。
+切片操作：b = a[:]
+工厂函数：b = list(a)
+copy 函数：b = copy.copy(a)
+
+深拷贝：深拷贝只有一种形式，copy 模块中的 deepcopy() 函数。同样的对列表 a = [1,2,"hello",['python', 'C++']]，如果使用 b = copy.deepcopy(a)，再修改列表 b 将不会影响到列表 a
+
+16、init 和__new__的区别？
+
+
+17、Python 的变量、对象以及引用？
+	•	变量是到内存空间的一个指针，也就是拥有指向对象连接的空间；
+	•	对象是一块内存，表示它们所代表的值；
+	•	引用就是自动形成的从变量到对象的指针 
+18、Python 里面如何生成随机数？
+andom.random()：生成一个 0-1 之间的随机浮点数
+random.uniform(a, b)：生成[a,b]之间的浮点数
+random.randint(a, b)：生成[a,b]之间的整数
+random.randrange(a, b, step)：在指定的集合[a,b)中，以 step 为基数随机取一个数
+random.choice(sequence)：从特定序列中随机取一个元素，这里的序列可以是字符串，列表，元组等
+
+
+19、Python 是强语言类型还是弱语言类型？
+Python 是强类型的动态脚本语言。
+强类型：不允许不同类型相加。
+动态：不使用显示数据类型声明，且确定一个变量的类型是在第一次给它赋值的时候。
+脚本语言：一般也是解释型语言，运行代码只需要一个解释器，不需要编译。
+
+
+20、Python 中有日志吗?怎么使用？
+Python 中有日志，Python 自带 logging 模块，调用 logging.basicConfig()方法，配置需要的日志等级和相应的参数，Python 解释器会按照配置的参数生成相应的日志
+
+logging.debug('debug message')
+logging.info("info message")
+logging.warn('warn message')
+logging.error("error message")
+logging.critical('critical message')
+
+21、Python 是如何进行类型转换的？
+内建函数封装了各种转换函数
+list---->tuple：tuple(list)
+tuple---->list：list(tuple)
+
+22、Python 中的作用域？
+一个变量的作用域总是由在代码中被赋值的地方所决定，也就是外部声明了一个a=1，那么我在test1里面声明一个b= a+1，那么这个b就是作用域
+
+23、什么是 Python 的命名空间？
+
+24、os.path和sys.path的区别？
+os.path是module，包含了各种处理长文件名(路径名)的函数。
+sys.path是由目录名构成的列表，Python 从中查找扩展模块( Python 源模块, 编译模块,或者二进制扩展). 启动 Python 时,这个列表从根据内建规则,PYTHONPATH 环境变量的内容, 以及注册表( Windows 系统)等进行初始化。
+
+
+25、输入某年某月某日，判断这一天是这一年的第几天？
+使用 Python 标准库 datetime
+import datetime
+
+def dayofyear():
+    year = input("请输入年份：")
+    month = input("请输入月份：")
+    day = input("请输入天：")
+    date1 = datetime.date(year=int(year)，month=int(month)，day=int(day))
+    date2 = datetime.date(year=int(year)，month=1，day=1)
+    return (date1-date2+1).days
+
+
+26、说明一下 os.path 和 sys.path 分别代表什么？
+os.path 主要是用于对系统路径文件的操作。
+sys.path 主要是对 Python 解释器的系统环境参数的操作（动态的改变 Python 解释器搜索路径）
+
+
+27、Python 中的 os 模块常见方法？
+os.remove() 删除文件
+os.rename() 重命名文件
+os.walk() 生成目录树下的所有文件
+os.chdir() 改变目录
+os.mkdir/makedirs 创建目录/多层目录
+os.rmdir/removedirs 删除目录/多层目录
+os.listdir() 列出指定目录的文件
+os.getcwd() 取得当前工作目录
+os.chmod() 改变目录权限
+os.path.basename() 去掉目录路径，返回文件名
+os.path.dirname() 去掉文件名，返回目录路径
+os.path.join() 将分离的各部分组合成一个路径名
+os.path.split() 返回（dirname(),basename())元组
+os.path.splitext() 返回(filename,extension)元组
+os.path.getatime\ctime\mtime 分别返回最近访问、创建、修改时间
+os.path.getsize() 返回文件大小
+os.path.exists() 是否存在
+os.path.isabs() 是否为绝对路径
+os.path.isdir() 是否为目录
+os.path.isfile() 是否为文件
+
+
+28、说一下字典和 json 的区别？
+字典是一种数据结构，json 是一种数据的表现形式，字典的 key 值只要是能 hash 的就行，json 的必须是字符串
+
+29、存入字典里的数据有没有先后排序？
+存入的数据不会自动排序，可以使用 sort 函数对字典进行排序
+
+30、lambda 表达式格式以及应用场景
+ambda函数就是可以接受任意多个参数（包括可选参数）并且返回单个表达式值得函数
+def calc(x,y):
+    return x*y
+可以替换成lambda x,y:x*y
+
+31、如何理解 Python 中字符串中的\字符？
+1、转义字符
+2、路径名中用来连接路径名
+3、编写太长代码手动软换行
+
+
+32、常用的 Python 标准库都有哪些？
+os 操作系统、time 时间、random 随机、pymysql 连接数据库、threading 线程、multiprocessing、gevent协成
+进程、queue 队列
+
+第三方库：
+django、flask、requests、virtualenv、selenium、scrapy、xadmin、celery、re、hashlib、md5
+
+常用的科学计算库：Numpy，Pandas、matplotlib
+
+33、介绍一下 except 的作用和用法？
+except: 捕获所有异常
+except:<异常名>: 捕获指定异常
+except:<异常名 1, 异常名 2>: 捕获异常 1 或者异常 2
+except:<异常名>,<数据>: 捕获指定异常及其附加的数据
+except:<异常名 1,异常名 2>:<数据>: 捕获异常名 1 或者异常名 2,及附加的数据
+
+34、在 except 中 return 后还会不会执行 finally 中的代码？怎么抛出自定义异常？
+会继续处理 finally 中的代码；
+用 raise 方法可以抛出自定义异常。
+
+
+35、read、readline 和 readlines 的区别？
+read:读取整个文件。
+readline：读取下一行，使用生成器方法。
+readlines：读取整个文件到一个迭代器以供我们遍历。
+
+
+36、range 和 xrange 的区别？
+两者用法相同，不同的是 range 返回的结果是一个列表，而 xrange 的结果是一个生成器。所以当列表
+很长时，使用 xrange 性能要比 range 好
+
+37、请简述你对 input()函数的理解？
+input()获取用户输入，不论用户输入的是什么，获取到的都是字符串类型的
+
+38、代码中要修改不可变数据会出现什么问题？抛出什么异常？
+代码不会正常运行，抛出 TypeError 异常。
+
+39、unittest 是什么？
+在 Python 中，unittest 是 Python 中的单元测试框架。它拥有支持共享搭建、自动测试、在测试
+中暂停代码、将不同测试迭代成一组等的功能。
+
+40、模块和包是什么？
+在 Python 中，模块是搭建程序的一种方式。每一个 Python 代码文件都是一个模块，并可以引用 其他的模块，比如对象和属性。
+一个包含许多 Python 代码的文件夹是一个包。一个包可以包含模块和子文件夹。
+
+41、正则表达式都有哪些？
+	•	.：匹配任意单个字符（除了换行符）。
+	•	\d：匹配任意数字，等价于 [0-9]。
+	•	\D：匹配任意非数字字符。
+	•	\w：匹配任意字母、数字或下划线，等价于 [a-zA-Z0-9_]。
+	•	\W：匹配任意非字母、数字或下划线字符。
+	•	\s：匹配任意空白字符（空格、制表符、换行符等）。
+	•	\S：匹配任意非空白字符。
+	•	[abc]：匹配字符 a、b 或 c 中的任意一个。
+	•	[^abc]：匹配除 a、b、c 之外的任意字符。
+	•	[a-z]：匹配任意小写字母。
+	•	[A-Z]：匹配任意大写字母。
+	•	[0-9]：匹配任意数字。
+	•	*：匹配前面的字符零次或多次。
+	•	+：匹配前面的字符一次或多次。
+	•	?：匹配前面的字符零次或一次。
+	•	{n}：匹配前面的字符恰好 n 次。
+	•	{n,}：匹配前面的字符至少 n 次。
+	•	{n,m}：匹配前面的字符至少 n 次，但不超过 m 次。
+	•	\：用于转义特殊字符，例如 \. 匹配字面上的点字符
+	•
+
+
+
+42、常用字符串格式化哪几种？
+% 格式化字符串操作符print 'hello %s and %s' % ('df', 'another df')
+字典形式的字符串格式化方法print 'hello %(first)s and %(second)s' % {'first': 'df', 'second': 'another df'}
+
+
+43、一行代码实现 1 - 100 的和
+可以利用 sum() 函数。sum(range(1,101))
+
+44、一行代码实现数值交换
+a = 1
+b = 2
+a, b = b, a
+
+45、一行代码求奇偶数
+[x for x in range(10) if x % 2 == 1]
+判断如果x除以2余数是1那么就是基数，否则偶数
+
+46、一行代码打乱列表
+用到 random 的 shuffle。
+list = [1, 2, 3]
+Random.shuffle(list)
+
+47、切片
+# 示例 1：字符串切片
+text = "Hello, World!"
+substring = text[0:5]  # 提取 "Hello"
+print(substring)  # 输出: Hello
+
+# 示例 2：列表切片
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+slice1 = numbers[0:5]  # 提取前 5 个元素
+print(slice1)  # 输出: [1, 2, 3, 4, 5]
+
+slice2 = numbers[2:6]  # 提取从索引 2 到 6 的元素
+print(slice2)  # 输出: [3, 4, 5, 6]
+
+slice3 = numbers[::2]  # 使用步长提取，提取每隔一个元素
+print(slice3)  # 输出: [1, 3, 5, 7, 9]
+
+# 示例 3：元组切片
+tup = (10, 20, 30, 40, 50)
+slice_tup = tup[1:4]  # 提取从索引 1 到 4 的元素
+print(slice_tup)  # 输出: (20, 30, 40)
+
+# 示例 4：负索引切片
+text = "Python Programming"
+slice_neg = text[-5:]  # 提取最后 5 个字符
+print(slice_neg)  # 输出: amming
+
+
+48、一行代码查看目录下所有文件
+os.listdir(‘.’)
+
+
+49、一行代码去除字符串间的空格
+join & split 函数
+‘’.join(list.splis(‘’))
+
+
+50、一行代码实现字符串整数列表变成整数列表
+使用 list & map & lambda
+list(map(lambda a : int(a), [‘1’, ‘2’. ‘3’]))
+
+
+51、一行代码删除列表中重复的值
+使用 list & set。
+a=[1,2,2]
+list(set(a))
+
+52、一行代码实现 9 * 9 乘法表
+def multiplication_table():
+    for i in range(1, 10):
+        for j in range(1, 10):
+            print(f"{i} * {j} = {i * j:2}", end="\t")
+        print()  # 换行
+
+multiplication_table()
+
+
+53、一行代码找出两个列表中相同的元素
+使用 set 和 &。或者如下
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+# 找出相同的元素
+common_elements = [item for item in list1 if item in list2]
+
+
+54、一行代码找出两个列表中不同的元素
+使用 set 和 ^。或者如下
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+# 找出不同的元素
+diff_elements = list(set(list1) ^ set(list2))
+
+
+55、一行代码合并两个字典
+使用 Update 函数。
+Des.updata(age)
+
+56、一行代码实现字典键从小到大排序
+original_dict = {'b': 2, 'a': 1, 'c': 3} # 示例字典
+sorted_dict = dict(sorted(original_dict.items()))
+
+
+
+
+
+
+
+
+
+
+

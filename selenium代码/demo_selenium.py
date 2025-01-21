@@ -7,7 +7,6 @@ import time
 driver = webdriver.Chrome()
 
 
-
 try:
     # 打开百度首页
     driver.get("https://www.baidu.com")
@@ -40,7 +39,18 @@ try:
 
         # 打印当前页面的标题
         print("当前页面标题:", driver.title)
-
+    time.sleep(10)
 finally:
     # 关闭浏览器
     driver.quit()
+
+
+from selenium.webdriver.support.ui import Select
+# 找到下拉列表元素
+dropdown = driver.find_element_by_id('dropdown_id')  # 替换为下拉列表的实际ID
+# 创建 Select 对象
+select = Select(dropdown)
+# 选择选项，可以通过索引、值或可见文本选择
+select.select_by_index(1)  # 选择第二个选项（索引从0开始）
+# select.select_by_value('option_value')  # 通过值选择
+# select.select_by_visible_text('Option Text')  # 通过可见文本选择

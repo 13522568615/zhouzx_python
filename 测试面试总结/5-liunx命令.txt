@@ -1,0 +1,42 @@
+文件目录管理
+* ls：列出目录内容。
+* cd：切换目录。
+* cp：复制文件或目录。
+* mv：移动或重命名文件或目录。
+* rm：删除文件或目录。
+* mkdir：创建新目录。
+* touch：创建空文件或更新文件的时间戳
+
+文件内容查看
+* cat：查看文件内容。
+* less：分页查看文件内容。
+* tail：查看文件的最后几行。
+* head：查看文件的前几行。
+* grep：搜索文件中的特定字符串。 例如：grep 'ha' nihao.txt
+* grep：搜索多个文件grep "text_to_search" file1 file2 file3
+
+（压缩）
+gzip：压缩文
+tar -zcvf c打包文件，v显示运行过程，f指定文件名
+例如：tar -zcvf pro.zip pro.txt
+
+（解压）
+tar -zxvf 解压
+tar -xvf ab.tar -C /usr------C代表指定解压的位置
+
+pwd查看当前目录
+ps -ef查看进程
+kill pid结束进程
+ifconfig网络通信命令
+ping测试网络连接
+
+（权限）
+* r：读权限（4）
+* w：写权限（2）
+* x：执行权限（1）
+
+* chmod 777 可读可写可执行
+* chmod 755 file：用户有读、写、执行权限（4+2+1=7），组和其他有读、执行权限（4+1=5）。
+* chmod 644 file：用户有读、写权限（6），组和其他有读权限（4
+
+给文件添加权限chmod +x script.sh，给文件删除权限chmod -w file.txt

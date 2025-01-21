@@ -1,0 +1,92 @@
+1、Locust 架构组成
+纯 Python 编写：Locust 使用 Python 编写测试用例，灵活且易于维护。
+HTTP 请求：它是基于 requests 库发送 HTTP 请求。
+协程运行：locust是使用协成运行的，用更低的成本实现更多的并发。并且是基于gevent实现的。
+分布式支持：支持分布式，支持更多的压力测试
+Web UI：内置了 Web UI，可通过浏览器进行控制和监控。
+插件扩展：我们可以用第三方的插件，进行扩展。
+
+
+2、locust测试用例步骤
+import locust
+
+class MyUser(locust.HttpUser):
+    wait_time = locust.between(1, 2)
+    @locust.task
+    def test_request(self):
+        resp = self.client.get(url="http://127.0.0.1:8080/")
+        print(resp.json())
+        assert resp.status_code == 200
+
+创建一个类，继承 locust.HttpUser。
+使用 @locust.task 装饰器标识性能测试用例。
+使用 self.client.get或者post 发送请求。
+设置 wait_time = locust.between(1, 2) 添加locust给我们提供的函数between，里面1和2的值代表着每个task间隔1到2秒，相当于每个测试用例的间隔
+
+3、locust执行命令
+locust -f 用例名称.py
+启动后打开生成的页面，即可在UI层进行性能测试
+
+4、locust测试参数
+Number of users (peak concurrency)：模拟的并发用户数，例如 1000。
+Ramp up (users spawned/second)：用户启动速率。比如：我们选择了1000个用户，如果我们这里填写10，也就代表着每秒有10个用户在调用 。
+Host：做过接口测试的同学都知道，就是填写接口的url。但是我们在性能测试用例中已经写了URL，那么这个就无所谓了。写不写都可以，所以我们就随便写个1（写1的原因是因为这个为空的话会报错，也算是一个bug）
+Run time：测试运行时间，例如 120s 表示运行2分钟。如果要一直运行那就不写
+
+5、性能测试结果参数
+Type	请求类型，如Get/Post
+Name	请求路径
+Requests	当前请求数量
+Failes	请求失败数量
+Median	中间值毫秒，一半的服务器响应低于该值，还有一半高于该值
+95%	95%的请求响应时间
+Average	平均值，单位毫秒，所有请求平均响应时间
+Min	请求的服务器最小响应时间
+
+
+6、执行命令参数
+locust -f 性能接口测试用例.py：启动命令
+--headless：无头参数，非GUI模式
+-u 1000：代表1000个用户
+-r 10：代表每秒10个用户递增
+--host=1：就是填写的url，因为我们代码内置了，所以就随便写个1（为什么写1，是因为不写会报错）
+-t或者--run-time 120s：就是运行的时长，运行120秒
+
+
+7、jmeter与locust的区别，
+
+jmeter主要支持java语言，采用的线程并发机制。但是jmeter得单机并发是比较低的
+
+locust主要是用Python语言实现的，采用的是Python里面gevent库，并且是协成的并发机制。在单机并发方面要比jmeter要高。
+
+
+8、线程和协程的区别
+* 一个线程可包含多个协程
+* 线程和进程是同步机制，协程是异步
+* 线程的切换由操作系统调度，协程由用户自己进行调度
+* 协程相较于线程更加轻量，资源消耗更低
+
+9、为什么选择locust
+（1）因为基于协成，用最低的成本可以实现最多的并发。
+（2）可以根据需求，采用不同的第三方库进行实现。易于扩展。
+（3）支持分布式，高并发能力。
+
+10、locust需要导入的必要模块
+* HttpUser：Locust的核心类，用于模拟用户行为。
+* task：装饰器，用于标记测试任务。
+* between：用于定义任务之间的等待时间
+
+11、Locust提供的等待时间函数都有哪些？
+* between(min, max)：在min和max秒之间随机等待。
+* constant(seconds)：固定等待指定秒数。
+* constant_pacing(seconds)：确保每个任务之间的间隔至少为指定秒数。
+我们合理设置等待时间，可以更真实地模拟用户行为，避免过度负载
+
+
+12、HttpUser与User的区别
+* HttpUser：适用于需要发送HTTP请求的性能测试场景，内置了self.client用于发送请求。
+* User：基本用户类，不自带self.client，适用于非HTTP协议的测试。
+
+
+13、tasks的用法？
+tasks属性定义了用户在测试过程中可以执行的多个任务及其权重。权重决定了任务被执行的概率和频率。

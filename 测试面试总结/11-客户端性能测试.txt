@@ -1,0 +1,10 @@
+使用工具：APP性能分析工作台（字节的）
+Github 地址
+Android：https://github.com/bytedance/Fastbot_Android
+iOS：https://github.com/bytedance/Fastbot_ios
+
+
+主要查看指标
+FPS帧率：主要是看卡顿程度，页面渲染程度。30-60-90主要看有没限制帧率
+CPU：手机的CPU工作情况30-60
+memory运行内存：运行内存主要看持续的操作下指标是否存在泄露和溢出（因为性能要及时的释放内存）

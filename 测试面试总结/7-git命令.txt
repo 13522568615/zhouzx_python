@@ -1,0 +1,33 @@
+* git clone https://xxxxx：克隆项目到本地
+* git init：初始化一个新的Git仓库。
+* git add [文件名或者目录]：将文件或目录添加到暂存区。
+* git commit -m ’‘备注：创建一个新的提交。
+* git push：将变更推送到远程仓库。
+* git status：查看工作区状态。
+* git log：查看提交日志。
+* git branch -v：查看、创建和删除分支。
+* git checkout -b [分支名]：切换分支或恢复文件。
+* git merge：合并分支。
+* git pull：从远程仓库拉取最新更改。
+* Git diff：git brach查看当前更改的详细内容
+
+
+
+
+1、在一个项目中我们的顺序是这样的，先去克隆一个项目，就是用git clone 项目地址。
+2、项目拉去到本地后，我们需要查看一下分支，就使用git branch -v或者-vv。
+3、此时我们查看分支后就需要创建自己的分支，就用git checkout -b 分支名，切换也是用这个。
+4、然后我们需要创建自己的提交分支，就是git branch —set-upstream-to=origin/zongxin 这样就是将本地分支，与我们自己的分支进行关联，形成关系
+5、这个时候我们就可以去编写代码了，编辑完代码后需要看下状态，git status。
+6、如果有改动的代码，我们就直接输入git add .就是把根目录下的所有文件加入暂存区。
+7、输入git commit -m “测试”就是把代码提交到本地，并且备注
+8、输入git push 会直接上传到我们自己的zongxin分支上了
+
+9、把本地分支合并到master分支上，那么输入git checkout master，在合并之前先拉去分支git pull，然后在输入git merge zongxin，就是把zongxin分支合并到当前分支（master），合并到master分支后，直接输入git add 然后git commit -m ‘’ 在然后git push，一套流程就结束了
+
+
+
+注意：
+1、如果两个人或者多个人开发同一个分支，那么就先pull代码，然后在push代码。如果有冲突先解决冲突，解决完冲突后再push到当前分支上。
+2、如果要版本覆盖，是不允许回退的，所以要找到自己上个版本的文件，还原自己的文件，直接进行pull，然后在push覆盖
+

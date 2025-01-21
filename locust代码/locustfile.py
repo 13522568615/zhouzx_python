@@ -14,4 +14,4 @@ class WebsiteUser(HttpUser):
     wait_time = between(1, 5)  # 用户之间的等待时间，1到5秒之间
 
 
-# 启动命令 locust -f locust代码/demo_locust.py --host=http://www.baidu.com
+# 启动命令 locust -f locust代码/locustfile.py --host=http://www.baidu.com

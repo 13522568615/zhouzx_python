@@ -1,0 +1,120 @@
+1、pytest编写测试用例的规则
+（1）开头的文件：test_
+（2）开头的类：Test
+（3）开头的函数或者方法：test_
+
+2、pytest的特点
+（1）pytest是以每个函数或者方法作为一个用例的
+（2）pytest主要以名字区分普通函数/方法和用例
+（3）pytest的启动方式就是在命令行输入 pytest
+（4）pytest会自动输出用例情况，执行情况以及汇总情况
+
+3、如何使用pytest中的fixture？
+@pytest.fixture装饰器，主要的作用就是测试函数的共享，可以让他在用例前或者用例后执行，所以他要结合着生成器yield去使用。示例：
+@pytest.fixture
+def setup():
+    print(“运行前)
+    yield
+    print(“运行后”)
+
+def test_fixture_example(setup):
+    assert 1 + 1 == 2
+这样当我们执行这条测试用例的时候，setup的函数会在运行前后执行。
+
+除了这个方法我们还可以用@pytest.mark.usefixtures(‘fix’)
+mark.pytest.mark.usefixtures的方法去实现。如下：
+@pytest.fixture()
+def fix():
+    print("用例执行前")
+    yield
+    print("用例执行后")
+
+@pytest.mark.usefixtures('fix')
+def test_a():  # 函数
+    assert 1 == 1  # 这里会测试通过
+
+class Test(object):  # 类
+    @pytest.mark.usefixtures('fix')
+    def test_b(self):  # 方法
+        print("1 == 2")
+        assert 1 == 2  # 这里会测试失败
+
+4、如何参数化测试函数？
+@pytest.mark.parametrize装饰器，主要的作用就是参数化用例，我们通过传递不同的参数来执行测试用例。
+@pytest.mark.parametrize("input, expected", [(1, 2), (2, 3), (3, 4)])
+def test_addition(input, expected):
+    assert input + 1 == expected
+
+5、如何跳过测试函数？
+@pytest.mark.skip装饰器，主要是跳过当前测试，不执行。
+@pytest.mark.skip(reason="Skipping this test")
+def test_to_be_skipped():
+    assert False
+
+6、指定条件成立时跳过？
+@pytest.mark.skipif：这个装饰器，用法就是在传递参数的时候掐年添加condition=True
+@pytest.mark.skipif(condition=True, reason="Skipping because condition is True")
+def test_conditionally_skipped():
+    assert False
+
+7、如何使用断言？
+我们可以使用assert语句来进行断言。
+assert a == b: 判断a是否等于b
+assert a != b: 判断a是否不等于b
+assert a in b: 判断a是否在b中
+assert a not in b: 判断a是否不在b中
+assert a is b: 判断a是否是b（相同的对象）
+assert a is not b: 判断a是否不是b（不同的对象）
+assert a > b: 判断a是否大于b
+assert a < b: 判断a是否小于b
+
+8、如何添加多个参数化？
+添加多个@pytest.mark.parametrize装饰器即可。
+@pytest.mark.parametrize("param1", [1, 2, 3])
+@pytest.mark.parametrize("param2", [4, 5, 6])
+def test_multiple_parameters(param1, param2):
+    print(param1 + param2)
+    assert param1 + param2
+
+9、运行输出详细结果
+pytest -vs
+
+10、生成内置的测试报告命令
+ pytest test_1.py --html=report.html
+
+11、用allure生成测试报告
+（1）需要再pytest.ini中配置命令：addopts = --alluredir=./temps --clean-alluredir
+（2）在运行文件内添加pytest.main()  # 执行pytest测试
+（3）然后在用os.system('allure generate -o report temps')
+（4）然后直接启动文件即可，当生成测试报告后我们用浏览器打开
+
+
+12、pytest和unittest的区别
+unittest：
+python内置的，无需要自己安装。
+unittest最开始是pyunit，参考的是junit有一定的java风格，最后改成了unittest。
+unittest没有插件机制，在功能和使用方面是有限的。
+unittest需要使用unittest.TestCase来实现参数化。
+
+pytest：
+第三方库，手动安装自由选择版本。
+pytest是python团队开发的，是专属于python风格的。
+有丰富的第三方插件，可以按需扩展。
+pytest支持参数化测试，使用@pytest.mark.parametrize装饰器
+
+
+13、运行文件的参数含义
+-v打印调试信息
+-q输出简单信息
+-s输出更详细的信息。如文件名称，用例名称
+-n多线程分布运行测试用例
+-x是要有一个失败的测试用例就停止运行
+
+
+14、pytest执行后信息含义
+. 运行成功
+F运行失败
+E运行错误
+s跳过的用例
+X预期外的通过
+x预期中的失败

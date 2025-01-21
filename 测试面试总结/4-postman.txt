@@ -1,0 +1,23 @@
+一个请求有四个重点要素：请求方式，请求url，请求头，请求体
+
+发送请求：get，post，put，delete等等，不过常用的就这几个。（get请求和delete都可以用params进行使用，post和put一般在body里面使用）
+
+params（查询传参）
+	通常是作为查询参数的时候出现，传递较少的参数，例如分页等等。
+        params：通常用于传递键值对形式的简单数据，如表单数据
+        params：适用于GET请求，传递少量数据，如搜索条件或分页参数
+
+body（请求体）
+	对于get请求通常是空的，但对于post、put、delete等请求可以返回大量数据。
+	body：可以包含更复杂的数据结构，如JSON、XML等格式
+
+bady中其他类型
+	form-data：用于发送键值对数据，特别适合发送文件和二进制数据。
+	x-www-form-urlencoded：这是表单提交的传统格式，不支持上传文件。
+	raw：发送原始的json或者xml格式的传参。但是需要用户指定传入Content-Type：如applocation/json或者text/xml。
+	binary：传入图片音频文件。
+
+设置环境变量：右上角有设置，直接点击配置就好了，传参的话就以{{test}}两个大括号中间加参数的形式传递。
+
+
+最大的区别就是get请求是在url里面的，然后post是在请求体里面

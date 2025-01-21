@@ -1,0 +1,19 @@
+adb devices 连接设备
+adb install <apk文件路径> 安装apk
+adb uninstall <包名> 卸载应用
+adb shell am start -n <包名>/<活动名> 启动APP
+
+adb logcat -d > crashlog.txt 查看崩溃日志
+
+adb push <本地文件路径> <设备路径> 复制文件到手机上
+adb pull <设备文件路径> <本地路径> 从设备复制文件
+
+adb reboot 重启
+
+adb shell screencap -p /sdcard/screenshot.png 截屏
+adb shell screenrecord /sdcard/demo.mp4 录屏
+
+
+adb shell monkey  -p 包名 -s20随机数 100000执行次数
+指定多个包名 -p 包名1 -p 包名2
+adb shell monkey -p包名 -s 20 --ignore-crashes --ignore-timeouts -v -v -v 100000 >monkey_log.txt
